@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import requests
+import os
 
 API_URL = "https://api.openai.com/v1/chat/completions"
-AUTH_TOKEN= "GPT_AUTH_TOKEN"
+AUTH_TOKEN= os.environ("GPT_AUTH_TOKEN")
 
 def read_reference_csv():
     contents = ""
@@ -40,8 +41,20 @@ def get_translation():
 
 langs = [
     {
+        "language": "French",
+        "lang_code": "fr"
+    },
+    {
+        "language": "Spanish",
+        "lang_code": "es"
+    },
+    {
         "language": "Portuguese",
         "lang_code": "pt"
+    },
+    {
+        "language": "Italian",
+        "lang_code": "it"
     },
     {
         "language": "German",
@@ -54,6 +67,10 @@ langs = [
     {
         "language": "Chinese (Simplified)",
         "lang_code": "zh"
+    },
+    {
+        "language": "Korean",
+        "lang_code": "ko"
     }
 ]
 
