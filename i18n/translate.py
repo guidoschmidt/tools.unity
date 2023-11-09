@@ -2,13 +2,18 @@
 # -*- coding: utf-8 -*-
 import requests
 import os
+import dotenv
+
+dotenv.load_dotenv()
 
 API_URL = "https://api.openai.com/v1/chat/completions"
-AUTH_TOKEN= os.environ("GPT_AUTH_TOKEN")
+AUTH_TOKEN= os.environ["GPT_AUTH_TOKEN"]
+
+print(AUTH_TOKEN)
 
 def read_reference_csv():
     contents = ""
-    with open("reference.csv", "r", encoding="utf8") as csvfile:
+    with open("csv/reference.csv", "r", encoding="utf8") as csvfile:
         contents = csvfile.read()
         csvfile.close()
     return contents
@@ -34,7 +39,7 @@ def get_translation():
     }
     r = requests.post(API_URL, json=payload, headers=headers)
     content = r.json()["choices"][0]["message"]["content"]
-    with open(f"{lang_code}.csv", "w", encoding="utf8") as outfile:
+    with open(f"csv/{lang_code}.csv", "w", encoding="utf8") as outfile:
         outfile.write(content)
         outfile.close()
 
